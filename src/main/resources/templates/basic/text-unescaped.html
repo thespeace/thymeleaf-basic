@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>text vs utext</h1>
+<ul>
+    <li>th:text = <span th:text="${data}"></span></li>
+    <li>th:utext = <span th:utext="${data}"></span></li>
+</ul>
+
+<!--th:inline="none" : 타임리프는 [[...]] 를 해석하기 때문에, 화면에 [[...]] 글자를 보여줄 수 없다.
+    이 테그 안에서는 타임리프가 해석하지 말라는 옵션이다.-->
+<h1><span th:inline="none">[[...]] vs [(...)]</span></h1>
+<ul>
+    <li><span th:inline="none">[[...]] = </span>[[${data}]]</li>
+    <li><span th:inline="none">[(...)] = </span>[(${data})]</li>
+</ul>
+
+</body>
+</html>
+<!--
+    -Unescape
+        이스케이프 기능을 사용하지 않으려면 어떻게 해야할까? 타임리프는 다음 두 기능을 제공한다.
+        1. th:text -> th:utext
+        2. [[...]] -> [(...)]
+
+    -주의!
+        실제 서비스를 개발하다 보면 escape를 사용하지 않아서 HTML이 정상 렌더링 되지 않는 수 많은 문제가 발생한다.
+        escape를 기본으로 하고, 꼭 필요한 때만 unescape를 사용하자.
+-->
