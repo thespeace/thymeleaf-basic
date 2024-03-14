@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1>SpringEL 표현식</h1>
+
+    (변수 표현식 : ${...})<br>
+    그리고 이 변수 표현식에는 스프링 EL이라는 스프링이 제공하는 표현식을 사용할 수 있다.
+
+    <ul>Object
+        <li>${user.username} = <span th:text="${user.username}"></span></li> <!--user의 username을 프로퍼티 접근-->
+        <li>${user['username']} = <span th:text="${user['username']}"></span></li> <!--user의 username을 프로퍼티 접근-->
+        <li>${user.getUsername()} = <span th:text="${user.getUsername()}"></span></li> <!--user의 getUsername() 을 직접 호출-->
+    </ul>
+
+    <ul>List
+        <li>${users[0].username} = <span th:text="${users[0].username}"></span></li> <!--List에서 첫 번째 회원을 찾고 username 프로퍼티 접근-->
+        <li>${users[0]['username']} = <span th:text="${users[0]['username']}"></span></li> <!--List에서 첫 번째 회원을 찾고 username 프로퍼티 접근-->
+        <li>${users[0].getUsername()} = <span th:text="${users[0].getUsername()}"></span></li> <!--List에서 첫 번째 회원을 찾고 메서드 직접 호출-->
+    </ul>
+
+    <ul>Map
+        <li>${userMap['userA'].username} = <span th:text="${userMap['userA'].username}"></span></li> <!--Map에서 userA를 찾고, username 프로퍼티 접근-->
+        <li>${userMap['userA']['username']} = <span th:text="${userMap['userA']['username']}"></span></li> <!--Map에서 userA를 찾고, username 프로퍼티 접근-->
+        <li>${userMap['userA'].getUsername()} = <span th:text="${userMap['userA'].getUsername()}"></span></li> <!--Map에서 userA를 찾고 메서드 직접 호출-->
+    </ul>
+
+
+    <h1>지역 변수 - (th:with)</h1>
+    지역 변수 선언<br>
+    th:with 를 사용하면 지역 변수를 선언해서 사용할 수 있다. 지역 변수는 선언한 테그 안(scope)에서만 사용할 수 있다.
+    <div th:with="first=${users[0]}">
+        <p>처음 사람의 이름은 <span th:text="${first.username}"></span></p>
+    </div>
+</body>
+</html>
