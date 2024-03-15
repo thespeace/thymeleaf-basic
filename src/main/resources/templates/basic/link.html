@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1>URL 링크</h1>
+    <ul>
+        <li><a th:href="@{/hello}">basic url</a></li>
+        <li><a th:href="@{/hello(param1=${param1}, param2=${param2})}">hello query param</a></li>
+        <li><a th:href="@{/hello/{param1}/{param2}(param1=${param1}, param2=${param2})}">path variable</a></li>
+        <li><a th:href="@{/hello/{param1}(param1=${param1}, param2=${param2})}">pathvariable + query parameter</a></li>
+    </ul>
+
+    <h4>상대경로, 절대경로, 프로토콜 기준을 표현할 수 도 있다.</h4>
+    <ul>
+        <li>/hello : 절대 경로</li>
+        <li>hello : 상대 경로</li>
+    </ul>
+</body>
+</html>
