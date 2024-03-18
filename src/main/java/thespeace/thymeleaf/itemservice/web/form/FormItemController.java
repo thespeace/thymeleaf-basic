@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import thespeace.thymeleaf.itemservice.domain.item.ItemType;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -38,6 +39,18 @@ public class FormItemController {
         regions.put("BUSAN", "부산");
         regions.put("JEJU", "제주");
         return regions;
+    }
+
+    /**
+     * <h2>타임리프에서 ENUM 직접 사용하기(참고만, 권장 X)</h2>
+     * 모델에 ENUM을 담아서 전달하는 대신에 타임리프는 자바 객체에 직접 접근할 수 있다.<br><br>
+     * {@code <div th:each="type : ${T(thespeace.thymeleaf.itemservice.domain.item.ItemType).values()}">} <br><br>
+     * 스프링EL 문법으로 ENUM을 직접 사용 가능, {@code values()}를 호출하면 해당 ENUM의 모든 정보가 배열로 반환.<br><br>
+     * 이렇게 사용하면 ENUM의 패키지 위치가 변경되거나 할때 자바 컴파일러가 타임리프까지 컴파일 오류를 잡을 수 없으므로 추천하지는 않는다.
+     */
+    @ModelAttribute("itemTypes")
+    public ItemType[] itemTypes() {
+        return ItemType.values(); //ItemType.values() : ENUM의 모든 정보를 배열로 반환.
     }
 
     @GetMapping("/intro")
@@ -71,6 +84,7 @@ public class FormItemController {
 
         log.info("item.open={}", item.getOpen());
         log.info("item.regions={}", item.getRegions());
+        log.info("item.itemTypes={}", item.getItemType());
 
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
