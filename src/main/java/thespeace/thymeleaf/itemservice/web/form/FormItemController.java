@@ -37,8 +37,9 @@ public class FormItemController {
     }
 
     @GetMapping("/add")
-    public String addForm() {
-        return "form/addForm";
+    public String addForm(Model model) {
+        model.addAttribute("item", new Item()); //`th:object`를 적용하려면 먼저 해당 오브젝트 정보를 넘겨주어야 한다.
+        return "form/addForm";                              //등록 폼이기 때문에 데이터가 비어있는 빈 오브젝트를 만들어서 뷰에 전달하자(빈 객체는 비용이 거의 들지않는다.).
     }
 
     @PostMapping("/add")
